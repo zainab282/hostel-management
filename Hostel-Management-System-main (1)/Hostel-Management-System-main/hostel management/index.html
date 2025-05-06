@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Management System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #3F72AF;
+            color: #37474f;
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #416b9f, #DBE2EF);
+            color: #082241; /* Darker teal for hero text */
+            padding: 100px 20px;
+            text-align: center;
+        }
+        .hero-title {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        .hero-subtitle {
+            font-size: 1.2em;
+            color: #112D4E;
+            margin-bottom: 30px;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 60px 20px;
+            background-color: #fff;
+        }
+        .features-grid {
+            max-width: 960px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .feature-item {
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .feature-icon {
+            font-size: 2em;
+            color: #00acc1;
+            margin-bottom: 15px;
+        }
+        .feature-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #37474f;
+        }
+        .feature-description {
+            color: #546e7a;
+        }
+
+        /* Call to Action Section */
+        .cta {
+            background-color: #e0f2f7;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        .cta-title {
+            font-size: 2.2em;
+            color: #082241;
+            margin-bottom: 30px;
+        }
+        .auth-section {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .auth-card {
+            background-color: #dbecf9;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            width: 250px;
+        }
+
+        .auth-card h3 {
+            color: #082241;
+            margin-bottom: 15px;
+        }
+
+        .auth-button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .signup-button {
+            background-color: #3f95df;
+            color: white;
+        }
+
+        .login-button {
+            background-color: #194d8b;
+            color: white;
+        }
+
+        .auth-button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #37474f;
+            color: #eceff1;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <h1 class="hero-title">Manage Your Hostel Effortlessly</h1>
+        <p class="hero-subtitle">The all-in-one platform for residents and administrators.</p>
+        <div class="container">
+            <h1>Welcome to Hostel Hub</h1>
+            <p>Please choose your role to sign up or log in.</p>
+    
+            <div class="auth-section">
+                <div class="auth-card">
+                    <h3>Admin Access</h3>
+                    <!-- <button class="auth-button signup-button" onclick="location.href='admin_signup.html'">Admin Sign Up</button> -->
+                    <button class="auth-button login-button" onclick="location.href='admin_login.html'">Admin Log In</button>
+                </div>
+    
+                <div class="auth-card">
+                    <h3>User Access</h3>
+                    <button class="auth-button signup-button" onclick="location.href='user_signup.html'">User Sign Up</button>
+                    <button class="auth-button login-button" onclick="location.href='user_login.html'">User Log In</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="features">
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">🏢</div>
+                <h3 class="feature-title">Room Availability</h3>
+                <p class="feature-description">Easily check real-time room and bed availability across all floors.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">⚠️</div>
+                <h3 class="feature-title">Issue Reporting</h3>
+                <p class="feature-description">Quickly report any maintenance or other issues for prompt resolution.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🔄</div>
+                <h3 class="feature-title">Room Change Requests</h3>
+                <p class="feature-description">Submit and track your room change requests with ease.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">📜</div>
+                <h3 class="feature-title">Chalan Generation</h3>
+                <p class="feature-description">Administrators can generate and manage chalan forms efficiently.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2 class="cta-title">Ready to Simplify Your Hostel Management?</h2>
+        <div class="auth-buttons">
+            <button class="auth-button signup-button">Join Now</button>
+            <button class="auth-button login-button">Access Your Account</button>
+        </div>
+    </section>
+
+    <footer class="footer">
+        &copy; 2025 Hostel Management System. All rights reserved.
+    </footer>
+
+    <script>
+        const signupButtons = document.querySelectorAll('.signup-button');
+        const loginButtons = document.querySelectorAll('.login-button');
+
+        signupButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // alert('Navigating to Sign Up page (not yet implemented)');
+                 window.location.href = 'signup.html';
+            });
+        });
+
+        loginButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // alert('Navigating to Log In page (not yet implemented)');
+                 window.location.href = 'login.html';
+            });
+        });
+    </script>
+</body>
+</html>

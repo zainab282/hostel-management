@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Challan - Hostel Management System</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: linear-gradient(135deg, #5a88c1, #6d96e3);
+            margin: 20px;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 400px; /* Adjusted max-width to be closer to the image */
+            margin: 0 auto;
+        }
+        h2 {
+            text-align: center;
+            color: #082241;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #082241;
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #082241; /* Green button color from the image */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%; /* Make button full width */
+        }
+        button:hover {
+            background-color: #012e64;
+        }
+        .payment-details {
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        .payment-item {
+            margin-bottom: 10px;
+        }
+        .total-amount {
+            margin-top: 20px;
+            text-align: right;
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Create Challan</h2>
+        <form id="createChallanForm">
+            <div class="form-group">
+                <label for="challanNumber">Challan Number</label>
+                <input type="text" id="challanNumber" name="challanNumber" value="118353" readonly>
+            </div>
+            <div class="form-group">
+                <label for="blockNo">Block No</label>
+                <select id="blockNo" name="blockNo">
+                    <option value="">Select Block</option>
+                    <option value="A">Block A</option>
+                    <option value="B">Block B</option>
+                    <option value="C">Block C</option>
+                    </select>
+            </div>
+            <div class="form-group">
+                <label for="roomNo">Room No</label>
+                <select id="roomNo" name="roomNo">
+                    <option value="">Select Room</option>
+                    <option value="101">101</option>
+                    <option value="102">102</option>
+                    <option value="201">201</option>
+                    </select>
+            </div>
+            <div class="form-group">
+                <label for="studentName">Student Name</label>
+                <select id="studentName" name="studentName">
+                    <option value="">Select Student</option>
+                    <option value="Ali">Ali</option>
+                    <option value="Sara">Sara</option>
+                    <option value="Ahmed">Ahmed</option>
+                    </select>
+            </div>
+
+            <div class="payment-details">
+                <h3>Payment Details</h3>
+                <div class="form-group payment-item">
+                    <label for="messFee">Mess Fee</label>
+                    <input type="number" id="messFee" name="messFee" value="5000">
+                </div>
+                <div class="form-group payment-item">
+                    <label for="parkingCharges">Parking Charges</label>
+                    <input type="number" id="parkingCharges" name="parkingCharges" value="100">
+                </div>
+                <div class="form-group payment-item">
+                    <label for="electricityFee">Electricity Fee</label>
+                    <input type="number" id="electricityFee" name="electricityFee" value="100">
+                </div>
+                <div class="form-group payment-item">
+                    <label for="waterCharges">Water Charges</label>
+                    <input type="number" id="waterCharges" name="waterCharges" value="100">
+                </div>
+                <div class="form-group payment-item">
+                    <label for="roomCharges">Room Charges</label>
+                    <input type="number" id="roomCharges" name="roomCharges" value="0">
+                </div>
+                <div class="form-group payment-item">
+                    <label for="otherDues">Other Dues</label>
+                    <input type="number" id="otherDues" name="otherDues" value="0">
+                </div>
+            </div>
+
+            <div class="total-amount">
+                <strong>Total:</strong> <span id="total">5300</span>
+            </div>
+
+            <button type="submit">Generate Challan</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('createChallanForm').addEventListener('input', function() {
+            let total = 0;
+            const messFee = parseFloat(document.getElementById('messFee').value) || 0;
+            const parkingCharges = parseFloat(document.getElementById('parkingCharges').value) || 0;
+            const electricityFee = parseFloat(document.getElementById('electricityFee').value) || 0;
+            const waterCharges = parseFloat(document.getElementById('waterCharges').value) || 0;
+            const roomCharges = parseFloat(document.getElementById('roomCharges').value) || 0;
+            const otherDues = parseFloat(document.getElementById('otherDues').value) || 0;
+
+            total = messFee + parkingCharges + electricityFee + waterCharges + roomCharges + otherDues;
+            document.getElementById('total').textContent = total;
+        });
+
+        document.getElementById('createChallanForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const challanData = {};
+            formData.forEach((value, key) => {
+                challanData[key] = value;
+            });
+            console.log('Challan Data:', challanData);
+            alert('Challan data generated (check console for details). In a real system, this would be sent to a server to create the actual challan.');
+            // In a real application, you might redirect to a confirmation page or display the generated challan.
+        });
+    </script>
+</body>
+</html>

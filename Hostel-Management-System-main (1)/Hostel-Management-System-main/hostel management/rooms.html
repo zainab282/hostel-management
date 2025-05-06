@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Availability - Hostel Management System</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chewy&family=Lato:wght@700&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Pacifico&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+        body {
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #5a88c1, #DBE2EF);
+        }
+        .header-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 2px;
+            color: #011226;
+            margin-bottom: 15px;
+            font-weight: bolder;
+        }
+
+        #room-availability-filter {
+            color: #011a39;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        #room-availability-filter label {
+            font-weight: bold;
+        }
+
+        #room-availability-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        #floorFilter {
+            width: 200px;
+            height: 30px;
+            font-weight: bold;
+            background-color: #d5e8ff;
+        }
+
+        #blockFilter {
+            width: 200px;
+            height: 30px;
+            font-weight: bold;
+            background-color: #d5e8ff;
+        }
+
+        .room-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .room-image {
+            width: 120px;
+            margin-right: 15px;
+        }
+
+        .room-image img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .room-details {
+            flex-grow: 1;
+        }
+
+        .room-details h4 {
+            margin-top: 0;
+            margin-bottom: 5px;
+            color: #37474f;
+        }
+
+        .room-details p {
+            margin-bottom: 5px;
+            color: #546e7a;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Room Availability 🛏️</h1>
+    <div id="room-availability-filter">
+        <label for="floorFilter">Filter by Floor:</label>
+        <select id="floorFilter">
+            <option value="">All Floors</option>
+            <option value="1">Floor 1</option>
+            <option value="2">Floor 2</option>
+            <option value="3">Floor 3</option>
+            <option value="4">Floor 4</option>
+        </select>
+        <label for="blockFilter">Filter by Block:</label>
+        <select id="blockFilter">
+            <option value="">All Blocks</option>
+            <option value="A">Block A</option>
+            <option value="B">Block B</option>
+            <option value="C">Block C</option>
+            <option value="D">Block D</option>
+        </select>
+    </div>
+    <div id="room-availability-list">
+    </div>
+
+    <script>
+        function loadAndDisplayRooms(floorFilterValue = '', blockFilterValue = '') {
+            const availabilityData = [];
+            const blocks = ['A', 'B', 'C', 'D'];
+            const totalBedsPerRoom = 4;
+
+            for (let block of blocks) {
+                for (let floor = 1; floor <= 4; floor++) {
+                    for (let room = 1; room <= 4; room++) {
+                        let availableBeds = 0;
+                        const beds = Array.from({ length: totalBedsPerRoom }, (_, i) => ({
+                            id: `${block}${floor}${room}${String.fromCharCode(65 + i)}`,
+                            occupied: Math.random() < 0.6
+                        }));
+                        availableBeds = beds.filter(bed => !bed.occupied).length;
+                        availabilityData.push({
+                            block: block,
+                            roomNumber: room,
+                            floorNumber: floor,
+                            totalBeds: totalBedsPerRoom,
+                            availableSeats: availableBeds
+                        });
+                    }
+                }
+            }
+
+            const filteredRooms = availabilityData.filter(room => {
+                const floorMatch = !floorFilterValue || room.floorNumber.toString() === floorFilterValue;
+                const blockMatch = !blockFilterValue || room.block === blockFilterValue;
+                return floorMatch && blockMatch;
+            });
+
+            const availabilityListDiv = document.getElementById('room-availability-list');
+            let cardsHTML = '';
+            filteredRooms.forEach(room => {
+                cardsHTML += `
+                    <div class="room-card">
+                        <div class="room-image">
+                            <img src="images/bed.png" alt="Bed Icon">
+                        </div>
+                        <div class="room-details">
+                            <h4>Block: ${room.block}</h4>
+                            <p>Floor: ${room.floorNumber}, Room: ${room.roomNumber}</p>
+                            <p>Available Seats: ${room.availableSeats} / ${room.totalBeds}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            availabilityListDiv.innerHTML = cardsHTML;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadAndDisplayRooms();
+
+            const floorFilter = document.getElementById('floorFilter');
+            const blockFilter = document.getElementById('blockFilter');
+
+            floorFilter.addEventListener('change', function () {
+                loadAndDisplayRooms(this.value, blockFilter.value);
+            });
+
+            blockFilter.addEventListener('change', function () {
+                loadAndDisplayRooms(floorFilter.value, this.value);
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Room Change Requests</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #5a88c1, #6d96e3);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        h2 {
+            color: #082241; /* Dark blue */
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .request-card {
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid #082241; /* Blue indicator */
+            position: relative;
+        }
+
+        .request-info {
+            margin-bottom: 10px;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #082241; /* Slightly darker blue */
+            margin-right: 5px;
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ffb74d; /* Amber for Pending */
+            color: white;
+            padding: 5px 8px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .request-card.approved .status-badge {
+            background-color: #4caf50; /* Green for Approved */
+        }
+
+        .request-card.rejected .status-badge {
+            background-color: #f44336; /* Red for Rejected */
+        }
+
+        .actions {
+            margin-top: 15px;
+            text-align: right;
+        }
+
+        .action-button {
+            padding: 8px 12px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            color: white;
+        }
+
+        .approve-button {
+            background-color: #4caf50;
+        }
+
+        .reject-button {
+            background-color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <h2>Room Change Requests</h2>
+
+    <div class="request-card">
+        <div class="status-badge">Pending</div>
+        <div class="request-info">
+            <span class="info-label">Name:</span> anus
+        </div>
+        <div class="request-info">
+            <span class="info-label">Current:</span> Block A, Room No: 2
+        </div>
+        <div class="request-info">
+            <span class="info-label">New:</span> A, 1
+        </div>
+        <div class="request-info">
+            <span class="info-label">Phone:</span> 0303-4314585
+        </div>
+        <div class="request-info">
+            <span class="info-label">Reason:</span> ghjh
+        </div>
+        <div class="actions">
+            <button class="action-button approve-button">Approve</button>
+            <button class="action-button reject-button">Reject</button>
+        </div>
+    </div>
+
+    <div class="request-card">
+        <div class="status-badge">Pending</div>
+        <div class="request-info">
+            <span class="info-label">Name:</span> anus
+        </div>
+        <div class="request-info">
+            <span class="info-label">Current:</span> Block A, Room No: 2
+        </div>
+        <div class="request-info">
+            <span class="info-label">New:</span> B, 1
+        </div>
+        <div class="request-info">
+            <span class="info-label">Phone:</span> 0303-4314585
+        </div>
+        <div class="request-info">
+            <span class="info-label">Reason:</span> I want to switch room
+        </div>
+        <div class="actions">
+            <button class="action-button approve-button">Approve</button>
+            <button class="action-button reject-button">Reject</button>
+        </div>
+    </div>
+
+    <script>
+        // In a real application, these buttons would trigger actions
+        // to approve or reject the room change request, likely involving
+        // sending data to a server.
+        const approveButtons = document.querySelectorAll('.approve-button');
+        const rejectButtons = document.querySelectorAll('.reject-button');
+        const requestCards = document.querySelectorAll('.request-card');
+
+        approveButtons.forEach((button, index) => {
+            button.addEventListener('click', function() {
+                alert(`Request ${index + 1} Approved! (Simulated)`);
+                requestCards[index].classList.remove('rejected', 'pending');
+                requestCards[index].classList.add('approved');
+                requestCards[index].querySelector('.status-badge').textContent = 'Approved';
+                requestCards[index].querySelector('.status-badge').style.backgroundColor = '#4caf50';
+            });
+        });
+
+        rejectButtons.forEach((button, index) => {
+            button.addEventListener('click', function() {
+                alert(`Request ${index + 1} Rejected! (Simulated)`);
+                requestCards[index].classList.remove('approved', 'pending');
+                requestCards[index].classList.add('rejected');
+                requestCards[index].querySelector('.status-badge').textContent = 'Rejected';
+                requestCards[index].querySelector('.status-badge').style.backgroundColor = '#f44336';
+            });
+        });
+    </script>
+</body>
+</html>

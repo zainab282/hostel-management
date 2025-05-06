@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Panel - Hostel Management System</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chewy&family=Lato:wght@700&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Pacifico&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            grid-template-rows: auto 1fr auto;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #082241;
+            color: #eceff1;
+            padding: 15px 20px;
+            text-align: left;
+            grid-column: 1 / 3;
+        }
+
+        .sidebar {
+            background-color: #082241;
+            color: #eceff1;
+            padding: 20px;
+            grid-row: 2 / 3;
+        }
+
+        .sidebar h2 {
+            color: #eceff1;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            padding: 10px 0;
+            border-bottom: 1px solid #546e7a;
+        }
+
+        .sidebar ul li:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar ul li a {
+            color: #eceff1;
+            text-decoration: none;
+            display: block;
+            padding: 8px 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #546e7a;
+        }
+
+        .main-content {
+            padding: 20px;
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+            overflow-y: auto;
+        }
+
+        .main-content h1 {
+            color: #082241;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #37474f;
+            color: #eceff1;
+            text-align: center;
+            padding: 10px;
+            grid-column: 1 / 3;
+            font-size: 0.9em;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .dashboard-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .dashboard-card:hover {
+            transform: scale(1.05);
+        }
+
+        .dashboard-card h3 {
+            margin-top: 10px;
+            margin-bottom: 0;
+            color: #082241;
+            font-size: 1.2em;
+        }
+
+        .dashboard-card .icon {
+            font-size: 2em;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .admin-summary {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .admin-summary h2 {
+            color: #00285a;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .admin-summary p {
+            margin-bottom: 8px;
+            color: #0a438a;
+        }
+
+        .section-content {
+            display: none;
+            margin-top: 20px;
+        }
+
+        :target .section-content {
+            display: block;
+        }
+
+        #room-availability-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .room-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .room-image {
+            width: 80px;
+            margin-right: 15px;
+        }
+
+        .room-image img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .room-details {
+            flex-grow: 1;
+        }
+
+        .room-details h4 {
+            margin-top: 0;
+            margin-bottom: 5px;
+            color: #37474f;
+        }
+
+        .room-details p {
+            margin-bottom: 5px;
+            color: #546e7a;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Hostel Management System - User Panel</h1>
+    </header>
+
+    <div class="sidebar">
+        <h2>Navigation</h2>
+        <ul>
+            <li><a href="#staff">Staff Members</a></li>
+            <li><a href="#create-staff">Create Staff</a></li>
+            <li><a href="#room-availability">Room Availability</a></li>
+            <li><a href="#issues">Issues</a></li>
+            <li><a href="#history">History</a></li>
+            <li><a href="#chalan-form">Chalan Form</a></li>
+            <li><a href="#room-change-requests">Room Change Requests</a></li>
+            <li><a href="#logout">Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <section class="admin-summary">
+            <h2>User Panel</h2>
+            <p>Room number: <span id="total-rooms">3</span></p>
+            <p>Block: <span id="total-staff">C</span></p>
+        </section>
+
+        <h2>Categories</h2>
+        
+        <div class="dashboard-grid">
+            <a href="rooms.html">
+            <div class="dashboard-card" onclick="window.location.href='rooms.html'">
+                <div class="icon">🏢</div>
+                <h3>Room Availability</h3>
+            </div>
+            </a>
+        <a href="useissue.html">
+            <div class="dashboard-card" onclick="window.location.href='#issues'">
+                <div class="icon">⚠️</div>
+                <h3>Report Issues</h3>
+            </div>
+        </a>
+        <a href="staff.html">
+            <div class="dashboard-card" onclick="window.location.href='#staff'">
+                <div class="icon">🧑‍💼</div>
+                <h3>Staff Members</h3>
+            </div>
+            </a>
+            <a href="access_denied.html">
+            <div class="dashboard-card" onclick="window.location.href='#create-staff'">
+                <div class="icon">➕🧑‍💼</div>
+                <h3>Create Staff</h3>
+            </div>
+            </a>
+        <a href="history.html">
+            <div class="dashboard-card" onclick="window.location.href='#chalan-form'">
+                <div class="icon">📄</div>
+                <h3>Chalan Form</h3>
+            </div>
+            </a>
+            <a href="roomchange.html">
+            <div class="dashboard-card" onclick="window.location.href='#room-change-requests'">
+                <div class="icon">🔄🔑</div>
+                <h3>Change Request</h3>
+            </div>
+            </a>
+            <a href="index.html ">
+            <div class="dashboard-card" onclick="window.location.href='#logout'">
+                <div class="icon">🚪</div>
+                <h3>Logout</h3>
+            </div>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Hostel Management System. All rights reserved.
+    </footer>
+
+    <script>
+        function loadAndDisplayRooms(floorFilterValue = '', blockFilterValue = '') {
+            const availabilityData = [];
+            const blocks = ['A', 'B', 'C', 'D'];
+
+            for (let block of blocks) {
+                for (let floor = 1; floor <= 4; floor++) {
+                    for (let room = 1; room <= 4; room++) {
+                        let availableBeds = 0;
+                        const beds = Array.from({ length: 4 }, (_, i) => ({
+                            id: `${floor}${room}${String.fromCharCode(65 + i)}`,
+                            occupied: Math.random() < 0.6
+                        }));
+                        availableBeds = beds.filter(bed => !bed.occupied).length;
+                        availabilityData.push({
+                            block: block,
+                            roomNumber: room,
+                            floorNumber: floor,
+                            totalBeds: 4,
+                            availableSeats: availableBeds
+                        });
+                    }
+                }
+            }
+
+            const filteredRooms = availabilityData.filter(room => {
+                const floorMatch = !floorFilterValue || room.floorNumber.toString() === floorFilterValue;
+                const blockMatch = !blockFilterValue || room.block === blockFilterValue;
+                return floorMatch && blockMatch;
+            });
+
+            const availabilityListDiv = document.getElementById('room-availability-list');
+            let cardsHTML = '';
+            filteredRooms.forEach(room => {
+                cardsHTML += `
+                    <div class="room-card">
+                        <div class="room-image">
+                            <img src="bed_icon.png" alt="Bed Icon">
+                        </div>
+                        <div class="room-details">
+                            <h4>Block: ${room.block}</h4>
+                            <p>Room: ${room.roomNumber} (Floor ${room.floorNumber})</p>
+                            <p>Available Seats: ${room.availableSeats} / ${room.totalBeds}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            availabilityListDiv.innerHTML = cardsHTML;
+        }
+
+        function loadStaffMembers() {
+            const staffData = [
+                { id: 1, name: 'John Doe' },
+                { id: 2, name: 'Jane Smith' }
+                // ... more staff
+            ];
+            const staffListDiv = document.getElementById('staff-list');
+            staffListDiv.innerHTML = staffData.map(staff => `<p>ID: ${staff.id}, Name: ${staff.name}</p>`).join('');
+        }
+
+        const createStaffSidebarLink = document.querySelector('.sidebar a[href="#create-staff"]');
+        if (createStaffSidebarLink) {
+            createStaffSidebarLink.addEventListener('click', function (event) {
+                event.preventDefault();
+                window.location.href = 'access_denied.html';
+            });
+        }
+
+        const createStaffDashboardCard = document.querySelector('.dashboard-grid a[href="#create-staff"] .dashboard-card');
+        if (createStaffDashboardCard) {
+            createStaffDashboardCard.addEventListener('click', function (event) {
+                window.location.href = 'access_denied.html';
+            });
+        }
+
+        function loadHistory() {
+            const historyData = [
+                { timestamp: '2025-04-20 16:00', action: 'Room 101A marked as occupied' },
+                { timestamp: '2025-04-20 15:30', action: 'Issue #1 resolved' }
+                // ... more history
+            ];
+            const historyLogDiv = document.getElementById('history-log');
+            historyLogDiv.innerHTML = '<ul>' + historyData.map(item => `<li>${item.timestamp}: ${item.action}</li>`).join('') + '</ul>';
+        }
+
+        const chalanForm = document.querySelector('#chalan-form-generator form');
+        chalanForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const studentNameInput = document.getElementById('studentName');
+            const studentName = studentNameInput.value;
+            if (studentName) {
+                alert(`Chalan form generated for ${studentName} (display not implemented).`);
+                studentNameInput.value = '';
+            } else {
+                alert('Please enter student name.');
+            }
+        });
+
+        function loadRoomChangeRequests() {
+            const requestsData = [
+                { id: 1, user: 'User A', currentRoom: '101A', requestedRoom: '202B', status: 'pending' },
+                { id: 2, user: 'User B', currentRoom: '303C', requestedRoom: '104D', status: 'approved' }
+                // ... more requests
+            ];
+            const requestsListDiv = document.getElementById('room-change-requests-list');
+            requestsListDiv.innerHTML = '<ul>' + requestsData.map(req => `<li>ID: ${req.id}, User: ${req.user}, From: ${req.currentRoom}, To: ${req.requestedRoom} (Status: ${req.status})</li>`).join('') + '</ul>';
+        }
+
+        function calculateAvailableSeats() {
+            let availableSeats = 0;
+            const blocks = ['A', 'B', 'C', 'D'];
+            for (let block of blocks) {
+                for (let floor = 1; floor <= 4; floor++) {
+                    for (let room = 1; room <= 4; room++) {
+                        const beds = Array.from({ length: 4 }, (_, i) => ({ occupied: Math.random() < 0.6 }));
+                        availableSeats += beds.filter(bed => !bed.occupied).length;
+                    }
+                }
+            }
+            return availableSeats;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadStaffMembers();
+            loadAndDisplayRooms();
+            loadIssues();
+            loadHistory();
+            loadRoomChangeRequests();
+
+            document.getElementById('total-rooms').textContent = 4 * 4 * 4 * 4;
+            document.getElementById('total-available-seats').textContent = calculateAvailableSeats();
+            document.getElementById('total-booked-seats').textContent = 4 * 4 * 4 * 4 - calculateAvailableSeats();
+            document.getElementById('total-staff').textContent = document.querySelectorAll('#staff-list p').length;
+
+            const floorFilter = document.getElementById('floorFilter');
+            const blockFilter = document.getElementById('blockFilter');
+
+            floorFilter.addEventListener('change', function () {
+                loadAndDisplayRooms(this.value, blockFilter.value);
+            });
+
+            blockFilter.addEventListener('change', function () {
+                loadAndDisplayRooms(floorFilter.value, this.value);
+            });
+
+            if (!window.location.hash) {
+                // Optionally hide all section contents on initial load if you prefer
+                const sectionContents = document.querySelectorAll('.section-content');
+                sectionContents.forEach(content => content.style.display = 'none');
+            } else {
+                // The CSS will handle showing the target section
+            }
+        });
+    </script>
+</body>
+
+</html>

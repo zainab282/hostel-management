@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff - Hostel Management System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #5a88c1, #6d96e3);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #082241; 
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .staff-card {
+            background-color: #f9fbe7; /* Light yellow-green */
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            border-left: 5px solid #388e3c; /* Green indicator */
+        }
+
+        .staff-info {
+            flex-grow: 1;
+            padding-left: 15px;
+        }
+
+        .staff-name {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #2e7d32; /* Darker green */
+            margin-bottom: 5px;
+        }
+
+        .staff-role {
+            color: #555;
+            margin-bottom: 3px;
+        }
+
+        .staff-email,
+        .staff-phone {
+            color: #777;
+            margin-bottom: 3px;
+            font-size: 0.9em;
+        }
+
+        .delete-button {
+            background-color: #f44336; /* Red */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .delete-button:hover {
+            background-color: #d32f2f;
+        }
+
+        .profile-icon {
+            background-color: #e0f2f7; /* Light blue */
+            color: #1976d2; /* Blue */
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+        }
+
+        .staff-list-container {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="staff-list-container">
+        <h1>All Staff</h1>
+
+        <div class="staff-card">
+            <div class="profile-icon">👤</div>
+            <div class="staff-info">
+                <div class="staff-name">majid khan</div>
+                <div class="staff-role">Job Role: sweeper</div>
+                <div class="staff-email">Email: majid@gmail.com</div>
+                <div class="staff-phone">Phone No: 0313-XXXXXXX</div>
+            </div>
+            <button class="delete-button" data-staff-id="1">Delete</button>
+        </div>
+        <div class="staff-card">
+            <div class="profile-icon">👤</div>
+            <div class="staff-info">
+                <div class="staff-name">asma</div>
+                <div class="staff-role">Job Role: head maid</div>
+                <div class="staff-email">Email: asma@gmail.com</div>
+                <div class="staff-phone">Phone No: 0304-XXXXXXX</div>
+            </div>
+            <button class="delete-button" data-staff-id="1">Delete</button>
+        </div>
+
+        </div>
+
+    <script>
+        const deleteButtons = document.querySelectorAll('.delete-button');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const staffId = this.dataset.staffId;
+                const staffCard = this.closest('.staff-card');
+                if (confirm(`Are you sure you want to delete staff member with ID ${staffId}?`)) {
+                    console.log(`Deleting staff member with ID: ${staffId}`);
+                    staffCard.remove(); // For demonstration, just remove the card from the UI
+                    alert(`Staff member with ID ${staffId} deleted (simulated).`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

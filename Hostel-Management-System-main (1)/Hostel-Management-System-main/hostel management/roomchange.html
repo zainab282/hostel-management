@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Change Request</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #5a88c1, #DBE2EF);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #082241;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #063164;
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: calc(100% - 12px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .block-room-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .block-room-container input[type="text"] {
+            width: calc(50% - 5px);
+        }
+
+        .select-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .select-container select {
+            flex: 1;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        button {
+            background-color: #082241;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #083874;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Room Change Request</h2>
+        <form action="request_submitted.html">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" value="anus" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" value="akhtar" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" value="0303-4314585" readonly>
+            </div>
+
+            <div class="form-group">
+                <label>Current Block and Room No:</label>
+                <div class="block-room-container">
+                    <input type="text" value="A" readonly>
+                    <input type="text" value="2" readonly>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Shift to Block and Room No:</label>
+                <div class="select-container">
+                    <select name="newBlock">
+                        <option value="">Select Block</option>
+                        <option value="B">Block B</option>
+                        <option value="C">Block C</option>
+                        </select>
+                    <select name="newRoom">
+                        <option value="">Select Room</option>
+                        <option value="101">Room 101</option>
+                        <option value="102">Room 102</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="reason">Reason for change</label>
+                <textarea id="reason" name="reason" placeholder="Reason"></textarea>
+            </div>
+
+            <button type="submit">Submit Request</button>
+        </form>
+    </div>
+</body>
+</html>
